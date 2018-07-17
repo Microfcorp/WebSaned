@@ -14,7 +14,7 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT"); // дата в прошлом
 
 <script type="text/javascript">
 
-	function PrintElem(elem)
+    function PrintElem(elem)
     {
 		//var newWin = window.open("about:blank", "hello", "width=200,height=200");
 		
@@ -129,16 +129,21 @@ id = d;
 function sledimg(){
 	var today = new Date();
     var milliseconds = today.getMilliseconds();
-
+	var maximum = <?system("bash /var/www/html/printing/CountMax.sh /mnt/scaning/ /var/www/html/printing/prinnfile/")?>;
+	
+	if(id < maximum){
 	id = id + 1;
 	postAjax('getimage.php?type=1&time=' + milliseconds + '&id=' + id, document.forms[0], function(d){document.getElementById("img").innerHTML = d;});
+	}
 }
 function predimg(){
 	var today = new Date();
     var milliseconds = today.getMilliseconds();
 
+	if(id > 0){
 	id = id - 1;
 	postAjax('getimage.php?type=1&time=' + milliseconds + '&id=' + id, document.forms[0], function(d){document.getElementById("img").innerHTML = d;});
+	}
 }
 function showResult(d){
 	//alert(d);
